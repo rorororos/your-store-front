@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>♡</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #000000;
+            color: #f0f0f0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            font-weight: 300;
+            letter-spacing: -0.3px;
+        }
+        
+        /* Efeito de fundo com polka dots minimalista */
+        #polka-dots {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(rgba(80, 80, 80, 0.15) 1px, transparent 1.5px),
+                radial-gradient(rgba(80, 80, 80, 0.15) 1px, transparent 1.5px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Barra de rolagem minimalista */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 20, 20, 0.8);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(100, 100, 100, 0.5);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(120, 120, 120, 0.7);
+        }
+        
+        /* Header minimalista */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        /* Ícone Hello Kitty no lugar do logo */
+        .hello-kitty-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #ffffff;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+        
+        .hello-kitty-icon:hover {
+            opacity: 1;
+        }
+        
+       /* Ícone do Instagram no canto direito */
+        .instagram-container {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+        
+        .instagram-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 22px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.4);
+            position: relative;
+        }
+        
+        /* Efeito pop-in com gradiente */
+        .instagram-icon:hover {
+            transform: scale(1.2);
+        }
+        
+        .instagram-icon i {
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .instagram-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            background-size: 200% 200%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+            filter: blur(5px);
+        }
+        
+        .instagram-icon:hover i {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transform: scale(1.1);
+        }
+        
+        .instagram-icon:hover::before {
+            opacity: 0.8;
+        }
+        
+        /* Conteúdo principal CENTRALIZADO */
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Hero section minimalista */
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 10px;
+        }
+        
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: #ffffff;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #b0b0b0;
+            font-weight: 300;
+        }
+        
+        /* Container do produto centralizado */
+        .product-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Título dos produtos */
+        .products-title {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ffffff;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+        
+        /* Card do produto centralizado */
+        .product-card {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 2px;
+            padding: 40px 35px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(60, 60, 60, 0.3);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            border-color: rgba(100, 100, 100, 0.5);
+            background: rgba(25, 25, 25, 0.7);
+            transform: translateY(-5px);
+        }
+        
+        /* Indicador de clique para o produto 1 */
+        .product-card.vip-royal::after {
+            content: 'Clique para acessar →';
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .product-card.vip-royal:hover::after {
+            opacity: 1;
+        }
+        
+        .product-icon {
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 25px;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+        
+        .product-card.vip-royal:hover .product-icon {
+            color: #ffd700;
+        }
+        
+        .product-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
+        
+        .product-description {
+            color: #a0a0a0;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            flex-grow: 1;
+            font-weight: 300;
+            font-size: 15px;
+            text-align: center;
+        }
+        
+        .product-description .feature {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .product-price {
+            font-size: 28px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+        
+        .product-meta {
+            color: #888;
+            font-size: 14px;
+            font-weight: 300;
+            margin-top: 5px;
+            text-align: center;
+        }
+        
+        /* Footer minimalista */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            font-size: 14px;
+            font-weight: 300;
+            border-top: 1px solid rgba(60, 60, 60, 0.3);
+            margin-top: 40px;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            main {
+                padding: 60px 15px;
+            }
+            
+            .product-container {
+                max-width: 450px;
+            }
+            
+            .product-card {
+                padding: 35px 25px;
+            }
+            
+            .product-card.vip-royal::after {
+                font-size: 11px;
+                bottom: -20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .products-title {
+                font-size: 20px;
+            }
+            
+            .product-card {
+                padding: 30px 20px;
+            }
+            
+            .product-title {
+                font-size: 20px;
+            }
+            
+            .product-price {
+                font-size: 24px;
+            }
+        }
+        
+        /* Linha divisória sutil */
+        .divider {
+            height: 1px;
+            background: rgba(60, 60, 60, 0.3);
+            width: 100%;
+            max-width: 200px;
+            margin: 40px auto;
+        }
+        
+        /* Efeito de loading para redirecionamento */
+        .redirect-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .redirect-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .redirect-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #ffd700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .redirect-text {
+            color: #fff;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fundo com polka dots minimalista -->
+    <div id="polka-dots"></div>
+    
+    <!-- Overlay de redirecionamento -->
+    <div class="redirect-overlay" id="redirectOverlay">
+        <div class="redirect-spinner"></div>
+        <div class="redirect-text">Redirecionando para VIP Royal...</div>
+    </div>
+    
+    <!-- Cabeçalho minimalista -->
+    <header>
+        <div class="hello-kitty-icon" title="Your Store">
+            <i class="fas fa-cat"></i>
+        </div>
+        <div class="instagram-container">
+            <a href="https://www.instagram.com/yourrdiscord/" target="_blank" class="instagram-icon" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </header>
+    
+    <!-- Conteúdo principal CENTRALIZADO -->
+    <main>
+        <section class="hero">
+            <h1>Your Store</h1>
+            <p>O melhor servidor do Brasil, entregando qualidade sempre.</p>
+        </section>
+        
+        <div class="divider"></div>
+        
+        <h2 class="products-title">Vips</h2>
+        
+        <div class="product-container">
+            <!-- Produto 1 - VIP Royal com redirecionamento -->
+            <div class="product-card vip-royal" id="vipRoyalCard">
+                <div class="product-icon">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <h3 class="product-title">Vip Royal</h3>
+                <p class="product-description">
+                    <span class="feature">﹒Cargo Personalizado</span>
+                    <span class="feature">﹒Call Privada</span>
+                    <span class="feature">﹒5X Mais XP</span>
+                    <span class="feature">﹒Perm Imagem</span>
+                    <span class="feature">﹒Excluir Mensagens</span>
+                    <span class="feature">﹒Muito mais!</span>
+                </p>
+                <div class="product-price">R$ 5</div>
+                <div class="product-meta">by team your</div>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- Rodapé minimalista -->
+        <footer>
+            <p>Para informações sobre compra: discord.gg/yourr</p>
+            <p style="margin-top: 10px; font-size: 13px; color: #555;">© 2026</p>
+        </footer>
+    </main>
+    
+    <script>
+        // Efeito do polka dots seguindo o mouse (mais sutil)
+        document.addEventListener('DOMContentLoaded', function() {
+            const polkaDots = document.getElementById('polka-dots');
+            const vipRoyalCard = document.getElementById('vipRoyalCard');
+            const redirectOverlay = document.getElementById('redirectOverlay');
+            
+            // URL para redirecionamento (substitua pelo seu link real)
+            const vipRoyalLink = "https://www.exemplo.com/vip-royal";
+            
+            // Configura o redirecionamento para o produto VIP Royal
+            vipRoyalCard.addEventListener('click', function() {
+                // Mostra o overlay de redirecionamento
+                redirectOverlay.classList.add('active');
+                
+                // Redireciona após 1.5 segundos (para mostrar o efeito visual)
+                setTimeout(function() {
+                    window.location.href = vipRoyalLink;
+                }, 1500);
+            });
+            
+            // Efeito de movimento do background
+            document.addEventListener('mousemove', function(e) {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                const moveX = mouseX * 10 - 5;
+                const moveY = mouseY * 10 - 5;
+                
+                polkaDots.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+            
+            // Efeito de parallax suave ao rolar
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.3;
+                
+                polkaDots.style.transform += ` translateY(${rate}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
